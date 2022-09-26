@@ -30,3 +30,11 @@ import { createRecommendationMusic } from "../factories/generateMusicRecommendat
 Cypress.Commands.add("resetDatabase", () => {
     cy.request("DELETE", `http://localhost:5000/recommendations/e2eReset`, {});
 });
+
+Cypress.Commands.add("createRecommendation", () => {
+    const newRecommendation = createRecommendationMusic();
+    cy.request("POST", `http://localhost:5000/recommendations`, {
+        name: newRecommendation.name,
+        youtubeLink: newRecommendation.youtubeLink,
+    });
+});
